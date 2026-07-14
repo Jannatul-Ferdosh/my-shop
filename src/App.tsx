@@ -1,9 +1,11 @@
-import { Heading } from "@chakra-ui/react"
+import NavBar from "./components/NavBar";
 
 const App = () => {
   return (
-    <Heading>MY SHOP</Heading>
-  )
-}
+    <>
+      <NavBar />
+    </>
+  );
+};
 
-export default App
+export default App;
