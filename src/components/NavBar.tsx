@@ -10,7 +10,10 @@ import NewArrivalButton from "./NewArrivalButton";
 
 const NavBar = () => {
   return (
-    <HStack paddingX="100px" paddingY="20px">
+    <HStack
+      paddingX={{ base: "40px", lg: "100px" }}
+      paddingY={{ base: "10px", lg: "20px" }}
+    >
       <ShopName />
       <ItemCategory />
       <OnsaleButton />
