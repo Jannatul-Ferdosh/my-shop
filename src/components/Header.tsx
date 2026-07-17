@@ -5,7 +5,6 @@ import FrontImage from "./FrontImage";
 const Header = () => {
   return (
     <SimpleGrid
-      justifyContent="center"
       columns={{ base: 1, md: 2 }}
       paddingX={{ base: "40px", lg: "100px" }}
       paddingY={{ base: "10px", lg: "20px" }}

@@ -1,11 +1,21 @@
-import { Button } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 
 const UserButton = () => {
   return (
-    <Button variant="plain">
-      <BiUserCircle />
-    </Button>
+    <IconButton
+          variant="ghost"
+          p={0}
+          m={0}
+          minW="auto"
+          minH="auto"
+          h="auto"
+          w="auto"
+          size={{base:"sm", md:"lg"}}
+        >
+          <BiUserCircle />
+        </IconButton>
+    //<Icon as={BiUserCircle} p={0} m={0} />
   );
 };
 
