@@ -1,5 +1,6 @@
 import useProducts from "@/hooks/useProducts";
-import { Image, Spinner } from "@chakra-ui/react";
+import { GridItem, SimpleGrid, Spinner } from "@chakra-ui/react";
+import ProductsCard from "./ProductsCard";
 
 const ProductsGrid = () => {
   const { data, error, isLoading } = useProducts();
@@ -8,7 +9,13 @@ const ProductsGrid = () => {
   if (data) console.log(data);
   return (
     <>
-      <Image src={data[0].image} />
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="30px" padding="20px">
+        {data.map((p: any) => (
+          <GridItem>
+            <ProductsCard product={p} />
+          </GridItem>
+        ))}
+      </SimpleGrid>
     </>
   );
 };
