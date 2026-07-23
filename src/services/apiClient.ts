@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
     baseURL:'https://fakestoreapi.com'
@@ -11,9 +11,9 @@ class APIClient{
         this.endpoint = endpoint;
     }
 
-    getAll = () =>{
+    getAll = (config: AxiosRequestConfig) =>{
         return axiosInstance
-        .get(this.endpoint)
+        .get(this.endpoint, config)
         .then( res => res.data)
     }
 }

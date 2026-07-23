@@ -1,12 +1,19 @@
 import APIClient from "@/services/apiClient";
+import useQueryStore from "@/store";
 import { useQuery } from "@tanstack/react-query";
 
-const apiClient = new APIClient('/products')
+const apiClient = new APIClient('/products');
+
 const useProducts = () =>{
-return useQuery({
-    queryKey: ['products'],
-    queryFn: () => apiClient.getAll()
-})
+    //const searchText = useQueryStore(s => s.searchText);
+    return useQuery({
+        queryKey: ['products'],
+        queryFn: () => apiClient.getAll({
+            params: {
+                //id: searchText
+            }
+        })
+    })
 }
 
 export default useProducts;
