@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Link } from "react-router";
 
 const HeadingText = () => {
   return (
@@ -31,6 +32,7 @@ const HeadingText = () => {
           style.
         </Text>
       </Box>
+      <Link to={"/AllProducts"}>
       <Button
         marginY="20px"
         width={{ base: "100%", md: "40%" }}
@@ -38,6 +40,7 @@ const HeadingText = () => {
       >
         Shop Now
       </Button>
+      </Link>
     </Flex>
   );
 };

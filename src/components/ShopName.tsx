@@ -1,10 +1,13 @@
 import { Heading } from "@chakra-ui/react";
+import { Link } from "react-router";
 
 const ShopName = () => {
   return (
-    <Heading whiteSpace="nowrap" mr={{md:"20px"}} fontWeight="extrabold">
-      MY SHOP
-    </Heading>
+    <Link to={"/"}>
+      <Heading whiteSpace="nowrap" mr={{ md: "20px" }} fontWeight="extrabold">
+        MY SHOP
+      </Heading>
+    </Link>
   );
 };
 
