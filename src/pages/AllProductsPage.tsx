@@ -9,7 +9,12 @@ const ProductsGrid = () => {
   if (data) console.log(data);
   return (
     <>
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="30px" padding="20px">
+      <SimpleGrid
+        columns={{ base: 1, md: 2, lg: 4 }}
+        gap="30px"
+        paddingY="20px"
+        paddingX={{ base: "40px", lg: "100px" }}
+      >
         {data.map((p: any) => (
           <GridItem>
             <ProductsCard product={p} />

@@ -1,11 +1,14 @@
 import type Product from "@/entities/product";
+import useQueryStore from "@/store";
 import { Button, Card, Image, Text } from "@chakra-ui/react";
+import ExpandableText from "./ExpandableText";
 
 interface Props {
   product: Product;
 }
 
 const ProductsCard = ({ product }: Props) => {
+  const addToCart = useQueryStore((s) => s.setCart);
   return (
     <Card.Root overflow="hidden">
       <Image
@@ -19,14 +22,21 @@ const ProductsCard = ({ product }: Props) => {
       />
       <Card.Body gap="2">
         <Card.Title>{product.category}</Card.Title>
-        <Card.Description>{product.description}</Card.Description>
+        <ExpandableText children={product.description}></ExpandableText>
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
           ${product.price}
         </Text>
       </Card.Body>
       <Card.Footer gap="2">
         <Button variant="solid">Buy now</Button>
-        <Button variant="ghost">Add to cart</Button>
+        <Button
+          variant="ghost"
+          onClick={() => {
+            addToCart(product);
+          }}
+        >
+          Add to cart
+        </Button>
       </Card.Footer>
     </Card.Root>
   );
