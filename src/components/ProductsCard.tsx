@@ -2,6 +2,7 @@ import type Product from "@/entities/product";
 import useQueryStore from "@/store";
 import { Button, Card, Image, Text } from "@chakra-ui/react";
 import ExpandableText from "./ExpandableText";
+import { toaster } from "./ui/toaster";
 
 interface Props {
   product: Product;
@@ -33,6 +34,10 @@ const ProductsCard = ({ product }: Props) => {
           variant="ghost"
           onClick={() => {
             addToCart(product);
+            toaster.create({
+              description: "Added to the cart",
+              type: "success",
+            });
           }}
         >
           Add to cart
