@@ -1,46 +1,62 @@
 import type Product from "@/entities/product";
 import {
-  GridItem,
+  Box,
+  Flex,
+  HStack,
   IconButton,
   Image,
-  SimpleGrid,
+  Separator,
   Text,
 } from "@chakra-ui/react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import ExpandableText from "./ExpandableText";
+import useQueryStore from "@/store";
 
 interface Props {
   cart: Product;
 }
 
 const SortProductCard = ({ cart }: Props) => {
+  const removeFromCart = useQueryStore((s) => s.removeFromCart);
+
   return (
-    <SimpleGrid columns={3}>
-      <GridItem>
+    <>
+      <HStack align="flex-start" gap={4}>
         <Image
           src={cart.image}
           fit="contain"
-          boxSize="100px"
-          padding="5px"
-          bgColor="#ede7e2"
-          borderRadius="5px"
+          w={{ base: "70px", md: "90px" }}
+          h={{ base: "100px", md: "130px" }}
+          p={2}
+          bg="#ede7e2"
+          borderRadius="md"
         />
-      </GridItem>
-      <GridItem>
-        <Text fontWeight="bold" marginBottom="5px">
-          {cart.category}
-        </Text>
-        <ExpandableText children={cart.description}></ExpandableText>
-        <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
-          ${cart.price}
-        </Text>
-      </GridItem>
-      <GridItem>
-        <IconButton variant="ghost">
-          <RiDeleteBinLine style={{ color: "red", fontSize: "24px" }} />
-        </IconButton>
-      </GridItem>
-    </SimpleGrid>
+
+        <Box flex="1">
+          <Text fontSize="xl" fontWeight="bold" mb={2}>
+            {cart.category}
+          </Text>
+
+          <ExpandableText>{cart.description}</ExpandableText>
+
+          <Text mt={2} fontSize="xl" fontWeight="medium">
+            ${cart.price}
+          </Text>
+        </Box>
+
+        <Flex>
+          <IconButton
+            variant="ghost"
+            colorPalette="red"
+            onClick={() => removeFromCart(cart.id)}
+          >
+            <RiDeleteBinLine size={22} />
+          </IconButton>
+        </Flex>
+      </HStack>
+
+      <Separator my={4} />
+    </>
   );
 };
 
