@@ -1,4 +1,3 @@
-import type Product from "@/entities/product";
 import {
   Box,
   Flex,
@@ -6,19 +5,22 @@ import {
   IconButton,
   Image,
   Separator,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import ExpandableText from "./ExpandableText";
 import useQueryStore from "@/store";
-
+import useProduct from "@/hooks/useProduct";
 interface Props {
-  cart: Product;
+  id: number;
 }
 
-const SortProductCard = ({ cart }: Props) => {
+const SortProductCard = ({ id }: Props) => {
   const removeFromCart = useQueryStore((s) => s.removeFromCart);
-
+  const { data: cart, isLoading, error } = useProduct(id);
+  if (isLoading) return <Spinner />;
+  if (error) throw error;
   return (
     <>
       <HStack align="flex-start" gap={4}>

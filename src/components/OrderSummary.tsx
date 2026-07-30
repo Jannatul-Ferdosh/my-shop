@@ -1,10 +1,21 @@
+import type Product from "@/entities/product";
+import useCarts from "@/hooks/useCarts";
+import useProducts from "@/hooks/useProducts";
 import { Box, Heading, Table } from "@chakra-ui/react";
 
-interface Props {
-  totalPrice: number;
-}
+const OrderSummary = () => {
+  const { data: allProducts, error: error1 } = useProducts();
+  if (error1) throw error1;
+  const { data: carts, error: error2 } = useCarts();
+  if (error2) throw error2;
+  let totalPrice = 0;
+  let priceList = new Map<number, number>();
 
-const OrderSummary = ({ totalPrice }: Props) => {
+  allProducts?.map((p: Product) => priceList.set(p.id, p.price));
+  carts.map((c: any) => {
+    totalPrice += priceList.get(c.id) || 0;
+  });
+
   return (
     <>
       <Box

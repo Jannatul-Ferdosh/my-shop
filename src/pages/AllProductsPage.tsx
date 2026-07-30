@@ -6,7 +6,6 @@ const ProductsGrid = () => {
   const { data, error, isLoading } = useProducts();
   if (error) return null;
   if (isLoading) return <Spinner />;
-  if (data) console.log(data);
   return (
     <>
       <SimpleGrid

@@ -1,11 +1,17 @@
 import OrderSummary from "@/components/OrderSummary";
 import SortProductCard from "@/components/SortProductCard";
-import useQueryStore from "@/store";
-import { Box, GridItem, Heading, SimpleGrid } from "@chakra-ui/react";
+import useCarts from "@/hooks/useCarts";
+//import useQueryStore from "@/store";
+import { Box, GridItem, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
 
 const CartPage = () => {
-  const carts = useQueryStore((s) => s.cart);
-  let total: number = 0;
+  //const carts = useQueryStore((s) => s.cart);
+  const { data: carts, error, isLoading } = useCarts();
+  if (isLoading) return <Spinner />;
+  if (error) throw error;
+  //if (carts) console.log(carts);
+  //let total: number = 0;
+
   return (
     <Box paddingX={{ base: "20px", lg: "100px" }}>
       <Heading paddingY="20px" size="3xl" fontWeight="bold">
@@ -20,18 +26,19 @@ const CartPage = () => {
             padding="10px"
             marginRight={{ lg: "20px" }}
           >
-            {carts.map((cart) => {
-              total += cart.price;
-              return (
-                <GridItem>
-                  <SortProductCard cart={cart} />
-                </GridItem>
-              );
+            {carts.map((cart: any) => {
+              return cart.products.map((c: any) => {
+                return (
+                  <GridItem key={c.productId}>
+                    <SortProductCard id={c.productId} />
+                  </GridItem>
+                );
+              });
             })}
           </SimpleGrid>
         </GridItem>
         <GridItem>
-          <OrderSummary totalPrice={total} />
+          <OrderSummary />
         </GridItem>
       </SimpleGrid>
     </Box>
