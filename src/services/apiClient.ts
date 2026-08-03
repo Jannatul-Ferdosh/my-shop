@@ -1,7 +1,7 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL:'https://fakestoreapi.com'
+    baseURL:'http://localhost:8765'
 })
 
 class APIClient{
@@ -21,6 +21,12 @@ class APIClient{
     return axiosInstance
       .get(this.endpoint + '/' + id)
       .then(res => res.data);
+  }
+
+  delete(id: number) {
+    return axiosInstance
+    .delete(this.endpoint + '/' + id)
+    .then(res => res.data);
   }
 }
 
