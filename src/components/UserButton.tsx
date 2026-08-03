@@ -1,9 +1,12 @@
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Menu, Portal } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
+import { Link } from "react-router";
 
 const UserButton = () => {
   return (
-    <IconButton
+    <Menu.Root>
+      <Menu.Trigger asChild>
+        <IconButton
           variant="ghost"
           p={0}
           m={0}
@@ -11,11 +14,24 @@ const UserButton = () => {
           minH="auto"
           h="auto"
           w="auto"
-          size={{base:"sm", md:"lg"}}
+          size={{ base: "sm", md: "lg" }}
         >
           <BiUserCircle />
         </IconButton>
-    //<Icon as={BiUserCircle} p={0} m={0} />
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner>
+          <Menu.Content>
+            <Link to={"/User/SignUp"}>
+              <Menu.Item value="sign-up">Sign Up</Menu.Item>
+            </Link>
+            <Link to={"/User/SignIn"}>
+              <Menu.Item value="sign-in">Sign In</Menu.Item>
+            </Link>
+          </Menu.Content>
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
   );
 };
 

@@ -1,3 +1,5 @@
+import type loginUser from "@/entities/loginUser";
+import type SignUpUser from "@/entities/SignUpUser";
 import axios, { type AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
@@ -14,7 +16,9 @@ class APIClient{
     getAll = (config: AxiosRequestConfig) =>{
         return axiosInstance
         .get(this.endpoint, config)
-        .then( res => res.data)
+        .then( res =>{
+console.log(res)
+        return res.data})
     }
 
     get = (id: number) => {
@@ -27,6 +31,18 @@ class APIClient{
     return axiosInstance
     .delete(this.endpoint + '/' + id)
     .then(res => res.data);
+  }
+
+  login(user: loginUser){
+    return axiosInstance
+    .post(this.endpoint, user)
+    .then(res => res.data)
+  }
+
+  SignUp(user: SignUpUser){
+    return axiosInstance
+    .post(this.endpoint, user)
+    .then(res => res.data)
   }
 }
 
