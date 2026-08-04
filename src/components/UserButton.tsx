@@ -1,8 +1,11 @@
+import useQueryStore from "@/store";
 import { IconButton, Menu, Portal } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router";
 
 const UserButton = () => {
+  const isLoggedIn = useQueryStore(s => s.isLoggedIn);
+  const setLoggedIn = useQueryStore(s => s.setLoggedIn);
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
@@ -22,12 +25,31 @@ const UserButton = () => {
       <Portal>
         <Menu.Positioner>
           <Menu.Content>
-            <Link to={"/User/SignUp"}>
-              <Menu.Item value="sign-up">Sign Up</Menu.Item>
-            </Link>
-            <Link to={"/User/SignIn"}>
-              <Menu.Item value="sign-in">Sign In</Menu.Item>
-            </Link>
+            {isLoggedIn && (
+              <Menu.Item
+                value="sign-out"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  setLoggedIn();
+                }}
+              >
+                Sign Out
+              </Menu.Item>
+            )}
+            {isLoggedIn === false && (
+              <Link to={"/User/SignUp"}>
+                <Menu.Item value="sign-up">
+                  Sign Up
+                </Menu.Item>
+              </Link>
+            )}
+            {isLoggedIn === false && (
+              <Link to={"/User/SignIn"}>
+                <Menu.Item value="sign-in">
+                  Sign In
+                </Menu.Item>
+              </Link>
+            )}
           </Menu.Content>
         </Menu.Positioner>
       </Portal>

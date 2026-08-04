@@ -16,7 +16,7 @@ const ProductsGrid = () => {
         paddingX={{ base: "40px", lg: "100px" }}
       >
         {data.map((p: any) => (
-          <GridItem>
+          <GridItem key={p.id}>
             <ProductsCard product={p} />
           </GridItem>
         ))}

@@ -6,6 +6,15 @@ const axiosInstance = axios.create({
     baseURL:'http://localhost:8765'
 })
 
+axiosInstance.interceptors.request.use((config)=>{
+  const token = localStorage.getItem("token");
+
+  if(token){
+    config.headers.Authorization = `Bearer ${token}`
+  }
+
+  return config;
+})
 class APIClient{
     endpoint: string;
 
@@ -16,9 +25,7 @@ class APIClient{
     getAll = (config: AxiosRequestConfig) =>{
         return axiosInstance
         .get(this.endpoint, config)
-        .then( res =>{
-console.log(res)
-        return res.data})
+        .then( res => res.data)
     }
 
     get = (id: number) => {

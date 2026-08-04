@@ -3,6 +3,7 @@ import type SignUpUser from "@/entities/SignUpUser";
 import useSignUp from "@/hooks/useSignUp";
 import { Box, Button, Field, Flex, Input, Stack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 const SignUpPage = () => {
   const {
@@ -12,6 +13,7 @@ const SignUpPage = () => {
   } = useForm<SignUpUser>();
 
   const mutateSignUp = useSignUp();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -23,6 +25,8 @@ const SignUpPage = () => {
           description: response.message,
           type: "error",
         });
+      } else {
+        navigate("/User/SignIn");
       }
     } catch (err) {
       toaster.create({
@@ -91,8 +95,8 @@ const SignUpPage = () => {
               <Input
                 {...register("password", {
                   minLength: {
-                    value: 8,
-                    message: "Minimum 8 characters",
+                    value: 3,
+                    message: "Minimum 3 characters",
                   },
                 })}
               />

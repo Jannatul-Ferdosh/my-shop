@@ -1,9 +1,11 @@
 import { toaster } from "@/components/ui/toaster";
 import type loginUser from "@/entities/loginUser";
 import useLogIn from "@/hooks/useLogIn";
+import useQueryStore from "@/store";
 import { Box, Button, Field, Flex, Input, Stack } from "@chakra-ui/react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 const SignInPage = () => {
   const {
@@ -12,12 +14,18 @@ const SignInPage = () => {
     formState: { errors },
   } = useForm<loginUser>();
 
+  const setLoggedIn = useQueryStore(s => s.setLoggedIn);
+  const navigate = useNavigate();
+
   const mutateLogIn = useLogIn();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
       const response = await mutateLogIn.mutateAsync(data);
       console.log(response);
+      localStorage.setItem("token", response.token);
+      setLoggedIn();
+      navigate("/");
     } catch (err) {
       if (axios.isAxiosError(err)) {
         toaster.create({
@@ -61,7 +69,7 @@ const SignInPage = () => {
               <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
             </Field.Root>
 
-            <Button type="submit">Sign In</Button>
+              <Button type="submit">Sign In</Button>
           </Stack>
         </form>
       </Box>
