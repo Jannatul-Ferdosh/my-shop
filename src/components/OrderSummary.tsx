@@ -12,8 +12,8 @@ const OrderSummary = () => {
   let priceList = new Map<number, number>();
 
   allProducts?.map((p: Product) => priceList.set(p.id, p.price));
-  carts.map((c: any) => {
-    totalPrice += priceList.get(c.id) || 0;
+  carts[0].products.map((p: any) => {
+    totalPrice += priceList.get(p.id) || 0;
   });
 
   return (

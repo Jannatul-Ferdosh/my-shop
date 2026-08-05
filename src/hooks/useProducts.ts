@@ -7,11 +7,7 @@ const useProducts = () =>{
     //const searchText = useQueryStore(s => s.searchText);
     return useQuery({
         queryKey: ['products'],
-        queryFn: () => apiClient.getAll({
-            params: {
-                //id: searchText
-            }
-        })
+        queryFn: () => apiClient.getAll()
     })
 }
 

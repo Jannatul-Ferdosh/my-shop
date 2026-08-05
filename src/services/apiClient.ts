@@ -1,6 +1,7 @@
+import type addProduct from "@/entities/addProduct";
 import type loginUser from "@/entities/loginUser";
 import type SignUpUser from "@/entities/SignUpUser";
-import axios, { type AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 const axiosInstance = axios.create({
     baseURL:'http://localhost:8765'
@@ -22,9 +23,9 @@ class APIClient{
         this.endpoint = endpoint;
     }
 
-    getAll = (config: AxiosRequestConfig) =>{
+    getAll = () =>{
         return axiosInstance
-        .get(this.endpoint, config)
+        .get(this.endpoint)
         .then( res => res.data)
     }
 
@@ -51,6 +52,13 @@ class APIClient{
     .post(this.endpoint, user)
     .then(res => res.data)
   }
+
+  addProduct(pid: addProduct){
+    return axiosInstance
+    .post(this.endpoint, pid)
+    .then(res => res.data)
+  }
+
 }
 
 export default APIClient;

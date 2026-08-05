@@ -22,7 +22,6 @@ const SignInPage = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const response = await mutateLogIn.mutateAsync(data);
-      console.log(response);
       localStorage.setItem("token", response.token);
       setLoggedIn();
       navigate("/");
