@@ -1,11 +1,11 @@
 import Header from "../components/Header";
-import ProductsGrid from "../components/ProductsGrid";
+import AllProductsPage from "./AllProductsPage";
 
 const HomePage = () => {
   return (
     <>
       <Header />
-      <ProductsGrid />
+      <AllProductsPage />
     </>
   );
 };
