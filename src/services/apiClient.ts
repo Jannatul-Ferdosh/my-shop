@@ -35,12 +35,6 @@ class APIClient{
       .then(res => res.data);
   }
 
-  delete(id: number) {
-    return axiosInstance
-    .delete(this.endpoint + '/' + id)
-    .then(res => res.data);
-  }
-
   login(user: loginUser){
     return axiosInstance
     .post(this.endpoint, user)
@@ -57,6 +51,12 @@ class APIClient{
     return axiosInstance
     .post(this.endpoint, pid)
     .then(res => res.data)
+  }
+
+  deleteProduct(id: number) {
+    return axiosInstance
+    .delete(this.endpoint + '/' + id)
+    .then(res => res.data);
   }
 
 }
