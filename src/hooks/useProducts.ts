@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 const apiClient = new APIClient('/products');
 
 const useProducts = () =>{
-    //const searchText = useQueryStore(s => s.searchText);
     return useQuery({
         queryKey: ['products'],
         queryFn: () => apiClient.getAll()

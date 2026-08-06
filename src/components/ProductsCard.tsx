@@ -1,7 +1,6 @@
 import type Product from "@/entities/product";
 import { Button, Card, Image, Text } from "@chakra-ui/react";
 import ExpandableText from "./ExpandableText";
-import { toaster } from "./ui/toaster";
 import useAddProduct from "@/hooks/useAddProduct";
 import type addProduct from "@/entities/addProduct";
 
@@ -39,10 +38,6 @@ const ProductsCard = ({ product }: Props) => {
           variant="ghost"
           onClick={() => {
             mutateAddProduct.mutate(pId);
-            toaster.create({
-              description: "Added to the cart",
-              type: "success",
-            });
           }}
         >
           Add to cart

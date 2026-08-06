@@ -1,4 +1,4 @@
-import { Button, HStack, IconButton, Menu, Portal } from "@chakra-ui/react";
+import { HStack, IconButton, Menu, Portal } from "@chakra-ui/react";
 import SearchInput from "./SearchInput";
 import ShopName from "./ShopName";
 import CartButton from "./CartButton";
@@ -6,6 +6,7 @@ import UserButton from "./UserButton";
 import OnsaleButton from "./OnsaleButton";
 import NewArrivalButton from "./NewArrivalButton";
 import { GiHamburgerMenu } from "react-icons/gi";
+import ItemCategory from "./ItemCategory";
 
 const NavBar = () => {
   return (
@@ -28,9 +29,7 @@ const NavBar = () => {
         <Portal>
           <Menu.Positioner>
             <Menu.Content>
-              <Menu.Item value="Shop">
-                <Button variant="plain">Shop</Button>
-              </Menu.Item>
+              <ItemCategory />
               <Menu.Item value="OnSaleButton">
                 <OnsaleButton />
               </Menu.Item>

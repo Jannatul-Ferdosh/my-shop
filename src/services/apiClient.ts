@@ -63,6 +63,13 @@ class APIClient{
   updateProduct(id: number, qn: updateProduct){
     return axiosInstance
     .put(this.endpoint + '/' + id, qn)
+    .then(res => res.data);
+  }
+
+  getAllCategories(){
+    return axiosInstance
+    .get(this.endpoint)
+    .then(res => res.data);
   }
 
 }
