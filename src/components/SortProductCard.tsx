@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   HStack,
   IconButton,
@@ -12,6 +13,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import ExpandableText from "./ExpandableText";
 import useProduct from "@/hooks/useProduct";
 import useDeleteProduct from "@/hooks/useDeleteProduct";
+import { LuMinus, LuPlus } from "react-icons/lu";
 interface Props {
   id: number;
 }
@@ -46,7 +48,7 @@ const SortProductCard = ({ id }: Props) => {
           </Text>
         </Box>
 
-        <Flex>
+        <Flex direction="column" justify="space-between">
           <IconButton
             variant="ghost"
             colorPalette="red"
@@ -54,6 +56,25 @@ const SortProductCard = ({ id }: Props) => {
           >
             <RiDeleteBinLine size={22} />
           </IconButton>
+          <HStack
+            border="1px solid"
+            borderColor="gray.200"
+            borderRadius="md"
+            p={1}
+            gap={1}
+          >
+            <Button size="xs" variant="ghost">
+              <LuMinus />
+            </Button>
+
+            <Text minW="32px" textAlign="center" fontWeight="bold">
+              1
+            </Text>
+
+            <Button size="xs" variant="ghost">
+              <LuPlus />
+            </Button>
+          </HStack>
         </Flex>
       </HStack>
 
