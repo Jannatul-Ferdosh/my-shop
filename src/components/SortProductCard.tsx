@@ -14,12 +14,16 @@ import ExpandableText from "./ExpandableText";
 import useProduct from "@/hooks/useProduct";
 import useDeleteProduct from "@/hooks/useDeleteProduct";
 import { LuMinus, LuPlus } from "react-icons/lu";
+import useUpdateProduct from "@/hooks/useUpdateProduct";
+import type { UpdateProductVariables } from "@/entities/updateProduct";
 interface Props {
   id: number;
+  qn: number;
 }
 
-const SortProductCard = ({ id }: Props) => {
+const SortProductCard = ({ id, qn }: Props) => {
   const mutateDeleteProduct = useDeleteProduct();
+  const mutateUpdateProduct = useUpdateProduct();
   const { data: product, isLoading, error } = useProduct(id);
   if (isLoading) return <Spinner />;
   if (error) throw error;
@@ -46,9 +50,57 @@ const SortProductCard = ({ id }: Props) => {
           <Text mt={2} fontSize="xl" fontWeight="medium">
             ${product.price}
           </Text>
+          <Box w="125px" mt="10px">
+            <HStack
+              border="1px solid"
+              borderColor="gray.200"
+              borderRadius="md"
+              p={1}
+              gap={1}
+            >
+              <Button
+                size="xs"
+                variant="ghost"
+                onClick={() => {
+                  if (qn === 1) return;
+                  qn--;
+                  const updateVariable: UpdateProductVariables = {
+                    id: id,
+                    qn: {
+                      quantity: qn,
+                    },
+                  };
+                  mutateUpdateProduct.mutate(updateVariable);
+                }}
+              >
+                <LuMinus />
+              </Button>
+
+              <Text minW="32px" textAlign="center" fontWeight="bold">
+                {qn}
+              </Text>
+
+              <Button
+                size="xs"
+                variant="ghost"
+                onClick={() => {
+                  qn++;
+                  const updateVariable: UpdateProductVariables = {
+                    id: id,
+                    qn: {
+                      quantity: qn,
+                    },
+                  };
+                  mutateUpdateProduct.mutate(updateVariable);
+                }}
+              >
+                <LuPlus />
+              </Button>
+            </HStack>
+          </Box>
         </Box>
 
-        <Flex direction="column" justify="space-between">
+        <Flex>
           <IconButton
             variant="ghost"
             colorPalette="red"
@@ -56,25 +108,6 @@ const SortProductCard = ({ id }: Props) => {
           >
             <RiDeleteBinLine size={22} />
           </IconButton>
-          <HStack
-            border="1px solid"
-            borderColor="gray.200"
-            borderRadius="md"
-            p={1}
-            gap={1}
-          >
-            <Button size="xs" variant="ghost">
-              <LuMinus />
-            </Button>
-
-            <Text minW="32px" textAlign="center" fontWeight="bold">
-              1
-            </Text>
-
-            <Button size="xs" variant="ghost">
-              <LuPlus />
-            </Button>
-          </HStack>
         </Flex>
       </HStack>
 

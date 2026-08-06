@@ -15,7 +15,8 @@ const ItemCategory = () => {
           <Menu.Content>
             <Menu.Item value="Men">Men</Menu.Item>
             <Menu.Item value="Women">Women</Menu.Item>
-            <Menu.Item value="Kids">Kids</Menu.Item>
+            <Menu.Item value="Jewelery">Jewelery</Menu.Item>
+            <Menu.Item value="Electronics">Electronics</Menu.Item>
           </Menu.Content>
         </Menu.Positioner>
       </Portal>

@@ -48,7 +48,7 @@ const CartDetailspage = () => {
               return cart.products.map((c: any) => {
                 return (
                   <GridItem key={c.productId}>
-                    <SortProductCard id={c.productId} />
+                    <SortProductCard id={c.productId} qn={c.quantity} />
                   </GridItem>
                 );
               });

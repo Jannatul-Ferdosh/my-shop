@@ -1,6 +1,7 @@
 import type addProduct from "@/entities/addProduct";
 import type loginUser from "@/entities/loginUser";
 import type SignUpUser from "@/entities/SignUpUser";
+import type updateProduct from "@/entities/updateProduct";
 import axios from "axios";
 
 const axiosInstance = axios.create({
@@ -57,6 +58,11 @@ class APIClient{
     return axiosInstance
     .delete(this.endpoint + '/' + id)
     .then(res => res.data);
+  }
+
+  updateProduct(id: number, qn: updateProduct){
+    return axiosInstance
+    .put(this.endpoint + '/' + id, qn)
   }
 
 }

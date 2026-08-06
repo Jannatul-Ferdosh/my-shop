@@ -13,7 +13,7 @@ const OrderSummary = () => {
 
   allProducts?.map((p: Product) => priceList.set(p.id, p.price));
   carts[0].products.map((p: any) => {
-    totalPrice += priceList.get(p.productId) || 0;
+    totalPrice += (priceList.get(p.productId) || 0) * p.quantity;
   });
 
   return (
