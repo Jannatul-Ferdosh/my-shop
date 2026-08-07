@@ -1,12 +1,13 @@
 import ProductsCard from "@/components/ProductsCard";
-import useProducts from "@/hooks/useProducts";
-import useQueryStore from "@/store";
+import useSelectedProduct from "@/hooks/useSelectedProduct";
 import { GridItem, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { useParams } from "react-router";
 
-const ProductsGrid = () => {
-  const setCategory = useQueryStore((s) => s.setCategory);
-  setCategory("All Products");
-  const { data, error, isLoading } = useProducts();
+const SelectedProductPage = () => {
+  const { category } = useParams<{ category: string }>();
+  if(category === undefined) return null;
+  const { data, error, isLoading } = useSelectedProduct(category);
+  console.log(data)
   if (error) return null;
   if (isLoading) return <Spinner />;
   return (
@@ -27,4 +28,4 @@ const ProductsGrid = () => {
   );
 };
 
-export default ProductsGrid;
+export default SelectedProductPage;

@@ -66,9 +66,9 @@ class APIClient{
     .then(res => res.data);
   }
 
-  getAllCategories(){
+  selectedProduct(category: string){
     return axiosInstance
-    .get(this.endpoint)
+    .get(this.endpoint + '/' + category)
     .then(res => res.data);
   }
 
