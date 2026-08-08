@@ -6,7 +6,9 @@ const apiClient = new APIClient('/carts');
 const useCarts = () =>{
     return useQuery({
         queryKey: ['carts'],
-        queryFn: () => apiClient.getAll()
+        queryFn: () => apiClient.getAll({
+            params:{}
+        })
     })
 }
 

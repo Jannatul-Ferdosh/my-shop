@@ -2,7 +2,7 @@ import type addProduct from "@/entities/addProduct";
 import type loginUser from "@/entities/loginUser";
 import type SignUpUser from "@/entities/SignUpUser";
 import type updateProduct from "@/entities/updateProduct";
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
     baseURL:'http://localhost:8765'
@@ -24,9 +24,9 @@ class APIClient{
         this.endpoint = endpoint;
     }
 
-    getAll = () =>{
+    getAll = (config: AxiosRequestConfig) =>{
         return axiosInstance
-        .get(this.endpoint)
+        .get(this.endpoint, config)
         .then( res => res.data)
     }
 
@@ -66,9 +66,9 @@ class APIClient{
     .then(res => res.data);
   }
 
-  selectedProduct(category: string){
+  selectedProduct(category: string, config: AxiosRequestConfig){
     return axiosInstance
-    .get(this.endpoint + '/' + category)
+    .get(this.endpoint + '/' + category,config)
     .then(res => res.data);
   }
 

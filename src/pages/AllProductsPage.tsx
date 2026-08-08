@@ -13,28 +13,68 @@ import {
 import { IoChevronDown } from "react-icons/io5";
 
 const ProductsGrid = () => {
+  const setSort = useQueryStore((s) => s.setSort);
+  const setSortby = useQueryStore((s) => s.setSorby);
   const setCategory = useQueryStore((s) => s.setCategory);
+  const sorted = useQueryStore(s => s.sorted);
+  const setSorted = useQueryStore( s => s.setSorted);
   setCategory("All Products");
   const { data, error, isLoading } = useProducts();
   if (error) return null;
   if (isLoading) return <Spinner />;
   return (
     <>
-      <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
+    <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
         <Menu.Root>
           <Menu.Trigger asChild>
             <Button bgColor="gray.200" variant="outline">
-              Sort by
+              {sorted || "Sort by"}
               <IoChevronDown />
             </Button>
           </Menu.Trigger>
           <Portal>
             <Menu.Positioner>
               <Menu.Content>
-                <Menu.Item value="price-asc">Price (Low to High)</Menu.Item>
-                <Menu.Item value="price-decs">Price (High to Low)</Menu.Item>
-                <Menu.Item value="name-asc">Name (A to Z)</Menu.Item>
-                <Menu.Item value="name-decs">Name (Z to A)</Menu.Item>
+                <Menu.Item
+                  value="price-asc"
+                  onClick={() => {
+                    setSort("asc");
+                    setSortby("price");
+                    setSorted("Price (Low to High)")
+                  }}
+                >
+                  Price (Low to High)
+                </Menu.Item>
+                <Menu.Item
+                  value="price-desc"
+                  onClick={() => {
+                    setSort("desc");
+                    setSortby("price");
+                    setSorted("Price (High to Low)")
+                  }}
+                >
+                  Price (High to Low)
+                </Menu.Item>
+                <Menu.Item
+                  value="name-asc"
+                  onClick={() => {
+                    setSort("asc");
+                    setSortby("name");
+                    setSorted("Name (A to Z)")
+                  }}
+                >
+                  Name (A to Z)
+                </Menu.Item>
+                <Menu.Item
+                  value="name-desc"
+                  onClick={() => {
+                    setSort("desc");
+                    setSortby("name");
+                    setSorted("Name (Z to A)")
+                  }}
+                >
+                  Name (Z to A)
+                </Menu.Item>
               </Menu.Content>
             </Menu.Positioner>
           </Portal>

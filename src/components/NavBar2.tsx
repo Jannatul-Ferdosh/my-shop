@@ -3,8 +3,6 @@ import SearchInput from "./SearchInput";
 import ShopName from "./ShopName";
 import CartButton from "./CartButton";
 import UserButton from "./UserButton";
-import OnsaleButton from "./OnsaleButton";
-import NewArrivalButton from "./NewArrivalButton";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ItemCategory from "./ItemCategory";
 
