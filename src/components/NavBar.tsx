@@ -5,8 +5,6 @@ import ShopName from "./ShopName";
 import ItemCategory from "./ItemCategory";
 import CartButton from "./CartButton";
 import UserButton from "./UserButton";
-import OnsaleButton from "./OnsaleButton";
-import NewArrivalButton from "./NewArrivalButton";
 
 const NavBar = () => {
   return (
@@ -16,8 +14,6 @@ const NavBar = () => {
     >
       <ShopName />
       <ItemCategory />
-      <OnsaleButton />
-      <NewArrivalButton />
       <SearchInput />
       <CartButton />
       <UserButton />

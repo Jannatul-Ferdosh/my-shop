@@ -30,12 +30,6 @@ const NavBar = () => {
           <Menu.Positioner>
             <Menu.Content>
               <ItemCategory />
-              <Menu.Item value="OnSaleButton">
-                <OnsaleButton />
-              </Menu.Item>
-              <Menu.Item value="NewArrivalButton">
-                <NewArrivalButton />
-              </Menu.Item>
             </Menu.Content>
           </Menu.Positioner>
         </Portal>

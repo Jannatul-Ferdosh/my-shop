@@ -1,7 +1,16 @@
 import ProductsCard from "@/components/ProductsCard";
 import useProducts from "@/hooks/useProducts";
 import useQueryStore from "@/store";
-import { GridItem, SimpleGrid, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  GridItem,
+  Menu,
+  Portal,
+  SimpleGrid,
+  Spinner,
+} from "@chakra-ui/react";
+import { IoChevronDown } from "react-icons/io5";
 
 const ProductsGrid = () => {
   const setCategory = useQueryStore((s) => s.setCategory);
@@ -11,8 +20,29 @@ const ProductsGrid = () => {
   if (isLoading) return <Spinner />;
   return (
     <>
+      <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
+        <Menu.Root>
+          <Menu.Trigger asChild>
+            <Button bgColor="gray.200" variant="outline">
+              Sort by
+              <IoChevronDown />
+            </Button>
+          </Menu.Trigger>
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content>
+                <Menu.Item value="price-asc">Price (Low to High)</Menu.Item>
+                <Menu.Item value="price-decs">Price (High to Low)</Menu.Item>
+                <Menu.Item value="name-asc">Name (A to Z)</Menu.Item>
+                <Menu.Item value="name-decs">Name (Z to A)</Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu.Root>
+      </Flex>
+
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 4 }}
+        columns={{ base: 1, md: 2, lg: 3 }}
         gap="30px"
         paddingY="20px"
         paddingX={{ base: "40px", lg: "100px" }}

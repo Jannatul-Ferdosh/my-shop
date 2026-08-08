@@ -13,7 +13,7 @@ const SelectedProductPage = () => {
   return (
     <>
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 4 }}
+        columns={{ base: 1, md: 2, lg: 3 }}
         gap="30px"
         paddingY="20px"
         paddingX={{ base: "40px", lg: "100px" }}
