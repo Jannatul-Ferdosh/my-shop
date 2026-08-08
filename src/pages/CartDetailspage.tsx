@@ -9,29 +9,11 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
-import axios from "axios";
 
 const CartDetailspage = () => {
   const { data: carts, error, isLoading } = useCarts();
   if (isLoading) return <Spinner />;
-  if (error) {
-    console.log(error);
-    if (axios.isAxiosError(error))
-      return (
-        <Flex justify="center">
-          <Box
-            border="solid 2px"
-            borderRadius="5px"
-            borderColor="gray.300"
-            padding="10px"
-            bgColor="#ffe19c"
-          >
-            <Heading>{error.response?.data.message}</Heading>
-          </Box>
-        </Flex>
-      );
-    else throw error;
-  }
+  if (error) throw error;
 
   if (carts[0].products.length === 0)
     return (

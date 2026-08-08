@@ -16,15 +16,15 @@ const ProductsGrid = () => {
   const setSort = useQueryStore((s) => s.setSort);
   const setSortby = useQueryStore((s) => s.setSorby);
   const setCategory = useQueryStore((s) => s.setCategory);
-  const sorted = useQueryStore(s => s.sorted);
-  const setSorted = useQueryStore( s => s.setSorted);
+  const sorted = useQueryStore((s) => s.sorted);
+  const setSorted = useQueryStore((s) => s.setSorted);
   setCategory("All Products");
   const { data, error, isLoading } = useProducts();
   if (error) return null;
   if (isLoading) return <Spinner />;
   return (
     <>
-    <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
+      <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
         <Menu.Root>
           <Menu.Trigger asChild>
             <Button bgColor="gray.200" variant="outline">
@@ -40,7 +40,7 @@ const ProductsGrid = () => {
                   onClick={() => {
                     setSort("asc");
                     setSortby("price");
-                    setSorted("Price (Low to High)")
+                    setSorted("Price (Low to High)");
                   }}
                 >
                   Price (Low to High)
@@ -50,7 +50,7 @@ const ProductsGrid = () => {
                   onClick={() => {
                     setSort("desc");
                     setSortby("price");
-                    setSorted("Price (High to Low)")
+                    setSorted("Price (High to Low)");
                   }}
                 >
                   Price (High to Low)
@@ -60,7 +60,7 @@ const ProductsGrid = () => {
                   onClick={() => {
                     setSort("asc");
                     setSortby("name");
-                    setSorted("Name (A to Z)")
+                    setSorted("Name (A to Z)");
                   }}
                 >
                   Name (A to Z)
@@ -70,7 +70,7 @@ const ProductsGrid = () => {
                   onClick={() => {
                     setSort("desc");
                     setSortby("name");
-                    setSorted("Name (Z to A)")
+                    setSorted("Name (Z to A)");
                   }}
                 >
                   Name (Z to A)

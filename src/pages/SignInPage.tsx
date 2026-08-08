@@ -14,7 +14,8 @@ const SignInPage = () => {
     formState: { errors },
   } = useForm<loginUser>();
 
-  const setLoggedIn = useQueryStore(s => s.setLoggedIn);
+  const setLoggedIn = useQueryStore((s) => s.setLoggedIn);
+  const setRole = useQueryStore((s) => s.setRole);
   const navigate = useNavigate();
 
   const mutateLogIn = useLogIn();
@@ -23,6 +24,7 @@ const SignInPage = () => {
     try {
       const response = await mutateLogIn.mutateAsync(data);
       localStorage.setItem("token", response.token);
+      setRole(response.role);
       setLoggedIn();
       navigate("/");
     } catch (err) {
@@ -68,7 +70,7 @@ const SignInPage = () => {
               <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
             </Field.Root>
 
-              <Button type="submit">Sign In</Button>
+            <Button type="submit">Sign In</Button>
           </Stack>
         </form>
       </Box>

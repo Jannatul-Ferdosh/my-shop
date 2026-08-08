@@ -5,8 +5,11 @@ import CartButton from "./CartButton";
 import UserButton from "./UserButton";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ItemCategory from "./ItemCategory";
+import UserListButton from "./UserListButton";
+import useQueryStore from "@/store";
 
 const NavBar = () => {
+  const role = useQueryStore((s) => s.role);
   return (
     <HStack padding="5px">
       <Menu.Root>
@@ -34,7 +37,8 @@ const NavBar = () => {
       </Menu.Root>
       <ShopName />
       <SearchInput />
-      <CartButton />
+      {(role === "customer" || role === "") && <CartButton />}
+      {role === "admin" && <UserListButton />}
       <UserButton />
     </HStack>
   );

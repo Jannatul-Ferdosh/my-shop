@@ -1,15 +1,23 @@
 import ProductsCard from "@/components/ProductsCard";
 import useSelectedProduct from "@/hooks/useSelectedProduct";
 import useQueryStore from "@/store";
-import { Button, Flex, GridItem, Menu, Portal, SimpleGrid, Spinner } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  GridItem,
+  Menu,
+  Portal,
+  SimpleGrid,
+  Spinner,
+} from "@chakra-ui/react";
 import { IoChevronDown } from "react-icons/io5";
 import { useParams } from "react-router";
 
 const SelectedProductPage = () => {
   const setSort = useQueryStore((s) => s.setSort);
   const setSortby = useQueryStore((s) => s.setSorby);
-  const sorted = useQueryStore(s => s.sorted);
-  const setSorted = useQueryStore( s => s.setSorted);
+  const sorted = useQueryStore((s) => s.sorted);
+  const setSorted = useQueryStore((s) => s.setSorted);
   const { category } = useParams<{ category: string }>();
   if (category === undefined) return null;
   const { data, error, isLoading } = useSelectedProduct(category);
@@ -18,7 +26,7 @@ const SelectedProductPage = () => {
   if (isLoading) return <Spinner />;
   return (
     <>
-    <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
+      <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
         <Menu.Root>
           <Menu.Trigger asChild>
             <Button bgColor="gray.200" variant="outline">
@@ -34,7 +42,7 @@ const SelectedProductPage = () => {
                   onClick={() => {
                     setSort("asc");
                     setSortby("price");
-                    setSorted("Price (Low to High)")
+                    setSorted("Price (Low to High)");
                   }}
                 >
                   Price (Low to High)
@@ -44,7 +52,7 @@ const SelectedProductPage = () => {
                   onClick={() => {
                     setSort("desc");
                     setSortby("price");
-                    setSorted("Price (High to Low)")
+                    setSorted("Price (High to Low)");
                   }}
                 >
                   Price (High to Low)
@@ -54,7 +62,7 @@ const SelectedProductPage = () => {
                   onClick={() => {
                     setSort("asc");
                     setSortby("name");
-                    setSorted("Name (A to Z)")
+                    setSorted("Name (A to Z)");
                   }}
                 >
                   Name (A to Z)
@@ -64,7 +72,7 @@ const SelectedProductPage = () => {
                   onClick={() => {
                     setSort("desc");
                     setSortby("name");
-                    setSorted("Name (Z to A)")
+                    setSorted("Name (Z to A)");
                   }}
                 >
                   Name (Z to A)
@@ -74,7 +82,7 @@ const SelectedProductPage = () => {
           </Portal>
         </Menu.Root>
       </Flex>
-      
+
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3 }}
         gap="30px"

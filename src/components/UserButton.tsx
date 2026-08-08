@@ -4,8 +4,9 @@ import { BiUserCircle } from "react-icons/bi";
 import { Link } from "react-router";
 
 const UserButton = () => {
-  const isLoggedIn = useQueryStore(s => s.isLoggedIn);
-  const setLoggedIn = useQueryStore(s => s.setLoggedIn);
+  const isLoggedIn = useQueryStore((s) => s.isLoggedIn);
+  const setLoggedIn = useQueryStore((s) => s.setLoggedIn);
+  const setRole = useQueryStore((s) => s.setRole);
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
@@ -30,6 +31,7 @@ const UserButton = () => {
                 value="sign-out"
                 onClick={() => {
                   localStorage.removeItem("token");
+                  setRole("");
                   setLoggedIn();
                 }}
               >
@@ -38,16 +40,12 @@ const UserButton = () => {
             )}
             {isLoggedIn === false && (
               <Link to={"/User/SignUp"}>
-                <Menu.Item value="sign-up">
-                  Sign Up
-                </Menu.Item>
+                <Menu.Item value="sign-up">Sign Up</Menu.Item>
               </Link>
             )}
             {isLoggedIn === false && (
               <Link to={"/User/SignIn"}>
-                <Menu.Item value="sign-in">
-                  Sign In
-                </Menu.Item>
+                <Menu.Item value="sign-in">Sign In</Menu.Item>
               </Link>
             )}
           </Menu.Content>
