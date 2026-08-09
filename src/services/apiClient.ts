@@ -1,4 +1,5 @@
 import type addProduct from "@/entities/addProduct";
+import type AdminAddProduct from "@/entities/AdminAddProduct";
 import type loginUser from "@/entities/loginUser";
 import type SignUpUser from "@/entities/SignUpUser";
 import type updateProduct from "@/entities/updateProduct";
@@ -72,6 +73,11 @@ class APIClient{
     .then(res => res.data);
   }
 
+  AdminAddProduct(prd: AdminAddProduct){
+    return axiosInstance
+    .post(this.endpoint, prd)
+    .then(res => res.data);
+  }
 }
 
 export default APIClient;

@@ -18,9 +18,7 @@ const SignUpPage = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const response = await mutateSignUp.mutateAsync(data);
-      console.log(response);
       if (response.status) {
-        console.log(response.status);
         toaster.create({
           description: response.message,
           type: "error",

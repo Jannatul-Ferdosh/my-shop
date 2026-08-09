@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignUpPage";
 import SignInPage from "./pages/SignInPage";
 import SelectedProductPage from "./pages/SelectedProductPage";
 import UserListPage from "./pages/UserListPage";
+import AdminAddProductPage from "./pages/AdminAddProductPage";
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,9 @@ const router = createBrowserRouter([
       { path: "/Cart", element: <CartPage /> },
       { path: "/User/SignUp", element: <SignUpPage /> },
       { path: "/User/SignIn", element: <SignInPage /> },
-      { path: "/category/:category", element: <SelectedProductPage/>},
-      { path: "UserListPage", element: <UserListPage/>}
+      { path: "/category/:category", element: <SelectedProductPage /> },
+      { path: "/UserListPage", element: <UserListPage /> },
+      { path: "/AdminAddProductPage", element: <AdminAddProductPage /> },
     ],
   },
 ]);

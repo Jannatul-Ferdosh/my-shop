@@ -1,3 +1,4 @@
+import AddProductButton from "@/components/AddProductButton";
 import ProductsCard from "@/components/ProductsCard";
 import useSelectedProduct from "@/hooks/useSelectedProduct";
 import useQueryStore from "@/store";
@@ -18,6 +19,7 @@ const SelectedProductPage = () => {
   const setSortby = useQueryStore((s) => s.setSorby);
   const sorted = useQueryStore((s) => s.sorted);
   const setSorted = useQueryStore((s) => s.setSorted);
+  const isAdmin = useQueryStore((s) => s.isAdmin);
   const { category } = useParams<{ category: string }>();
   if (category === undefined) return null;
   const { data, error, isLoading } = useSelectedProduct(category);
@@ -81,6 +83,7 @@ const SelectedProductPage = () => {
             </Menu.Positioner>
           </Portal>
         </Menu.Root>
+        {isAdmin && <AddProductButton />}
       </Flex>
 
       <SimpleGrid

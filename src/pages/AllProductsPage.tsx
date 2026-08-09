@@ -11,6 +11,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { IoChevronDown } from "react-icons/io5";
+import AddProductButton from "@/components/AddProductButton";
 
 const ProductsGrid = () => {
   const setSort = useQueryStore((s) => s.setSort);
@@ -18,6 +19,7 @@ const ProductsGrid = () => {
   const setCategory = useQueryStore((s) => s.setCategory);
   const sorted = useQueryStore((s) => s.sorted);
   const setSorted = useQueryStore((s) => s.setSorted);
+  const isAdmin = useQueryStore((s) => s.isAdmin);
   setCategory("All Products");
   const { data, error, isLoading } = useProducts();
   if (error) return null;
@@ -79,6 +81,7 @@ const ProductsGrid = () => {
             </Menu.Positioner>
           </Portal>
         </Menu.Root>
+        {isAdmin && <AddProductButton />}
       </Flex>
 
       <SimpleGrid
