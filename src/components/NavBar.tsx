@@ -9,7 +9,7 @@ import UserListButton from "./UserListButton";
 import useQueryStore from "@/store";
 
 const NavBar = () => {
-  const role = useQueryStore((s) => s.role);
+  const isAdmin = useQueryStore((s) => s.isAdmin);
   return (
     <HStack
       paddingX={{ base: "40px", lg: "100px" }}
@@ -18,8 +18,8 @@ const NavBar = () => {
       <ShopName />
       <ItemCategory />
       <SearchInput />
-      {(role === "customer" || role === "") && <CartButton />}
-      {role === "admin" && <UserListButton />}
+      {isAdmin === false && <CartButton />}
+      {isAdmin && <UserListButton />}
       <UserButton />
       <ColorModeButton />
     </HStack>

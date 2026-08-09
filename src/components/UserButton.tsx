@@ -6,7 +6,8 @@ import { Link } from "react-router";
 const UserButton = () => {
   const isLoggedIn = useQueryStore((s) => s.isLoggedIn);
   const setLoggedIn = useQueryStore((s) => s.setLoggedIn);
-  const setRole = useQueryStore((s) => s.setRole);
+  const setisAdmin = useQueryStore((s) => s.setisAdmin);
+
   return (
     <Menu.Root>
       <Menu.Trigger asChild>
@@ -31,8 +32,9 @@ const UserButton = () => {
                 value="sign-out"
                 onClick={() => {
                   localStorage.removeItem("token");
-                  setRole("");
+                  localStorage.removeItem("role")
                   setLoggedIn();
+                  setisAdmin();
                 }}
               >
                 Sign Out

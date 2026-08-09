@@ -15,7 +15,7 @@ const SignInPage = () => {
   } = useForm<loginUser>();
 
   const setLoggedIn = useQueryStore((s) => s.setLoggedIn);
-  const setRole = useQueryStore((s) => s.setRole);
+  const setisAdmin = useQueryStore((s) => s.setisAdmin);
   const navigate = useNavigate();
 
   const mutateLogIn = useLogIn();
@@ -24,7 +24,8 @@ const SignInPage = () => {
     try {
       const response = await mutateLogIn.mutateAsync(data);
       localStorage.setItem("token", response.token);
-      setRole(response.role);
+      localStorage.setItem("role", response.role);
+      setisAdmin();
       setLoggedIn();
       navigate("/");
     } catch (err) {

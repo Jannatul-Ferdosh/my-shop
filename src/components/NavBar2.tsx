@@ -9,7 +9,7 @@ import UserListButton from "./UserListButton";
 import useQueryStore from "@/store";
 
 const NavBar = () => {
-  const role = useQueryStore((s) => s.role);
+  const isAdmin = useQueryStore((s) => s.isAdmin);
   return (
     <HStack padding="5px">
       <Menu.Root>
@@ -37,8 +37,8 @@ const NavBar = () => {
       </Menu.Root>
       <ShopName />
       <SearchInput />
-      {(role === "customer" || role === "") && <CartButton />}
-      {role === "admin" && <UserListButton />}
+      {isAdmin === false && <CartButton />}
+      {isAdmin && <UserListButton />}
       <UserButton />
     </HStack>
   );
