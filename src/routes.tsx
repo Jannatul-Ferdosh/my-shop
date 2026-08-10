@@ -9,6 +9,7 @@ import SignInPage from "./pages/SignInPage";
 import SelectedProductPage from "./pages/SelectedProductPage";
 import UserListPage from "./pages/UserListPage";
 import AdminAddProductPage from "./pages/AdminAddProductPage";
+import AdminUpdateProductPage from "./pages/AdminUpadateProductPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "/category/:category", element: <SelectedProductPage /> },
       { path: "/UserListPage", element: <UserListPage /> },
       { path: "/AdminAddProductPage", element: <AdminAddProductPage /> },
+      { path: "/AdminUpdateProductPage/:productId", element: <AdminUpdateProductPage /> },
     ],
   },
 ]);

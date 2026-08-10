@@ -3,17 +3,19 @@ import { Button, Card, Image, Text } from "@chakra-ui/react";
 import ExpandableText from "./ExpandableText";
 import useAddProduct from "@/hooks/useAddProduct";
 import type addProduct from "@/entities/addProduct";
+import useQueryStore from "@/store";
+import { Link } from "react-router";
 
 interface Props {
   product: Product;
 }
 
 const ProductsCard = ({ product }: Props) => {
-  
+  const isAdmin = useQueryStore((s) => s.isAdmin);
   const mutateAddProduct = useAddProduct();
 
-  const pId : addProduct = {productId: product.id};
-  
+  const pId: addProduct = { productId: product.id };
+
   return (
     <Card.Root overflow="hidden">
       <Image
@@ -26,22 +28,36 @@ const ProductsCard = ({ product }: Props) => {
         fit="contain"
       />
       <Card.Body gap="2">
-        <Card.Title>{product.category}</Card.Title>
+        <Card.Title>{product.title}</Card.Title>
+        <Text fontWeight="bold">({product.category})</Text>
         <ExpandableText children={product.description}></ExpandableText>
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
           ${product.price}
         </Text>
       </Card.Body>
       <Card.Footer gap="2">
-        <Button variant="solid">Buy now</Button>
-        <Button
-          variant="ghost"
-          onClick={() => {
-            mutateAddProduct.mutate(pId);
-          }}
-        >
-          Add to cart
-        </Button>
+        {!isAdmin && (
+          <Link to={"/Cart"}>
+            <Button variant="solid">Buy now</Button>
+          </Link>
+        )}
+        {!isAdmin && (
+          <Button
+            variant="ghost"
+            onClick={() => {
+              mutateAddProduct.mutate(pId);
+            }}
+          >
+            Add to cart
+          </Button>
+        )}
+        {isAdmin && (
+          <Link
+            to={`/AdminUpdateProductPage/${encodeURIComponent(product.id)}`}
+          >
+            <Button variant="solid">Update</Button>
+          </Link>
+        )}
       </Card.Footer>
     </Card.Root>
   );

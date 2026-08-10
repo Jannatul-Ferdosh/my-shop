@@ -42,8 +42,9 @@ const SortProductCard = ({ id, qn }: Props) => {
 
         <Box flex="1">
           <Text fontSize="xl" fontWeight="bold" mb={2}>
-            {product.category}
+            {product.title}
           </Text>
+          <Text fontWeight="bold">({product.category})</Text>
 
           <ExpandableText>{product.description}</ExpandableText>
 

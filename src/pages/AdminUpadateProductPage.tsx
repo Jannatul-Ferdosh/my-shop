@@ -1,28 +1,37 @@
 import type Product from "@/entities/product";
-import useAdminAddProduct from "@/hooks/useAdminAddProduct";
+import useAdminUpdateProduct from "@/hooks/useAdminUpdateProduct";
+import useProduct from "@/hooks/useProduct";
 import {
   Box,
   Button,
   Field,
   Flex,
   Input,
+  Spinner,
   Stack,
   Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router";
 
-const AdminAddProductPage = () => {
+const AdminUpdateProductPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Product>();
 
-  const mutateAdminAddProduct = useAdminAddProduct();
+  const mutateAdminUpdateProduct = useAdminUpdateProduct();
+  const { productId } = useParams<{ productId: string }>();
+  const pid = Number(productId);
+  const { data: prd, isLoading, error } = useProduct(pid);
 
   const onSubmit = handleSubmit(async (data) => {
-    mutateAdminAddProduct.mutateAsync(data);
+    mutateAdminUpdateProduct.mutateAsync(data);
   });
+
+  if (isLoading) return <Spinner />;
+  if (error) throw error;
 
   return (
     <Flex justify="center">
@@ -40,7 +49,7 @@ const AdminAddProductPage = () => {
                 Title
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Input {...register("title")} />
+              <Input defaultValue={prd.title} {...register("title")} />
             </Field.Root>
 
             <Field.Root required invalid={!!errors.price}>
@@ -48,7 +57,7 @@ const AdminAddProductPage = () => {
                 Price
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Input {...register("price")} />
+              <Input defaultValue={prd.price} {...register("price")} />
             </Field.Root>
 
             <Field.Root required invalid={!!errors.description}>
@@ -56,7 +65,10 @@ const AdminAddProductPage = () => {
                 Description
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Textarea {...register("description")} />
+              <Textarea
+                defaultValue={prd.description}
+                {...register("description")}
+              />
             </Field.Root>
 
             <Field.Root required invalid={!!errors.category}>
@@ -64,7 +76,7 @@ const AdminAddProductPage = () => {
                 Category
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Input {...register("category")} />
+              <Input defaultValue={prd.category} {...register("category")} />
             </Field.Root>
 
             <Field.Root required invalid={!!errors.image}>
@@ -72,10 +84,10 @@ const AdminAddProductPage = () => {
                 Image
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Input {...register("image")} />
+              <Input defaultValue={prd.image} {...register("image")} />
             </Field.Root>
 
-            <Button type="submit">Add</Button>
+            <Button type="submit">Update</Button>
           </Stack>
         </form>
       </Box>
@@ -83,4 +95,4 @@ const AdminAddProductPage = () => {
   );
 };
 
-export default AdminAddProductPage;
+export default AdminUpdateProductPage;
