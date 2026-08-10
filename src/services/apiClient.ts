@@ -1,3 +1,4 @@
+import type { status } from "@/entities/activeUservariable";
 import type addProduct from "@/entities/addProduct";
 import type AdminAddProduct from "@/entities/AdminAddProduct";
 import type loginUser from "@/entities/loginUser";
@@ -80,9 +81,15 @@ class APIClient{
     .then(res => res.data);
   }
 
-  AdminUpdateProduct(pid:number,prd: Product){
+  AdminUpdateProduct(pid:number, prd: Product){
     return axiosInstance
     .put(this.endpoint + '/' + pid, prd)
+    .then(res => res.data);
+  }
+
+  activeUser(id: number, status: status){
+    return axiosInstance
+    .patch(this.endpoint + '/' + id + "/active", status)
     .then(res => res.data);
   }
 }

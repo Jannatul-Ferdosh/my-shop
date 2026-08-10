@@ -6,7 +6,8 @@ export default interface User{
     name:{
         firstname: string,
         lastname: string
-    },
+    };
+    active: boolean;
     address:{
         city:string,
         street:string,
@@ -16,6 +17,6 @@ export default interface User{
             lat:string,
             long:string
         }
-    },
+    };
     phone:string
 }

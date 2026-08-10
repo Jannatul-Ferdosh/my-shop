@@ -1,17 +1,18 @@
+import type activeUserVariable from "@/entities/activeUservariable";
 import type User from "@/entities/user";
-import { Box, Flex, Heading, HStack, IconButton, Text } from "@chakra-ui/react";
-import { FaUserEdit } from "react-icons/fa";
-import { RiDeleteBinLine } from "react-icons/ri";
+import useActiveUser from "@/hooks/useActiveUser";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 
 interface Props {
   user: User;
 }
 
 const UserCard = ({ user }: Props) => {
+  const mutateActiveUser = useActiveUser();
   return (
     <>
-      <HStack
-        align="flex-start"
+      <Flex
+        direction={{ base: "column", md: "row" }}
         border="2px solid"
         borderColor="gray.300"
         borderRadius="10px"
@@ -37,16 +38,40 @@ const UserCard = ({ user }: Props) => {
             <b>Password</b>: {user.password}
           </Text>
         </Box>
-
-        <Flex direction="column" justify="flex-end">
-          <IconButton variant="ghost">
-            <FaUserEdit size={22} />
-          </IconButton>
-          <IconButton variant="ghost" colorPalette="red">
-            <RiDeleteBinLine size={22} />
-          </IconButton>
-        </Flex>
-      </HStack>
+        {user.active && (
+          <Button
+            m={5}
+            bgColor="green.600"
+            onClick={() => {
+              const activeUserVariable: activeUserVariable = {
+                id: user.id,
+                status: {
+                  active: false,
+                },
+              };
+              return mutateActiveUser.mutate(activeUserVariable);
+            }}
+          >
+            Deactivate
+          </Button>
+        )}
+        {!user.active && (
+          <Button
+            m={5}
+            onClick={() => {
+              const activeUserVariable: activeUserVariable = {
+                id: user.id,
+                status: {
+                  active: true,
+                },
+              };
+              mutateActiveUser.mutate(activeUserVariable);
+            }}
+          >
+            Activate
+          </Button>
+        )}
+      </Flex>
     </>
   );
 };
