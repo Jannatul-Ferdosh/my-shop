@@ -80,9 +80,9 @@ class APIClient{
     .then(res => res.data);
   }
 
-  AdminUpdateProduct(prd: Product){
+  AdminUpdateProduct(pid:number,prd: Product){
     return axiosInstance
-    .put(this.endpoint + '/' + prd.id, prd)
+    .put(this.endpoint + '/' + pid, prd)
     .then(res => res.data);
   }
 }

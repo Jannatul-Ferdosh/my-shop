@@ -1,4 +1,5 @@
 import type Product from "@/entities/product";
+import type { UpdateAdminProduct } from "@/entities/updateAdminProduct";
 import useAdminUpdateProduct from "@/hooks/useAdminUpdateProduct";
 import useProduct from "@/hooks/useProduct";
 import {
@@ -26,8 +27,9 @@ const AdminUpdateProductPage = () => {
   const pid = Number(productId);
   const { data: prd, isLoading, error } = useProduct(pid);
 
-  const onSubmit = handleSubmit(async (data) => {
-    mutateAdminUpdateProduct.mutateAsync(data);
+  const onSubmit = handleSubmit((data) => {
+    const updateVariable: UpdateAdminProduct = { pid: pid, prd: data };
+    mutateAdminUpdateProduct.mutate(updateVariable);
   });
 
   if (isLoading) return <Spinner />;
