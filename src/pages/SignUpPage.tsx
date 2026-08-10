@@ -1,3 +1,4 @@
+import { PasswordInput } from "@/components/ui/password-input";
 import { toaster } from "@/components/ui/toaster";
 import type SignUpUser from "@/entities/SignUpUser";
 import useSignUp from "@/hooks/useSignUp";
@@ -90,7 +91,8 @@ const SignUpPage = () => {
                 Password
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Input
+              <PasswordInput
+                type="password"
                 {...register("password", {
                   minLength: {
                     value: 3,

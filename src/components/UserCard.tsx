@@ -41,7 +41,7 @@ const UserCard = ({ user }: Props) => {
         {user.active && (
           <Button
             m={5}
-            bgColor="green.600"
+            bgColor="green"
             onClick={() => {
               const activeUserVariable: activeUserVariable = {
                 id: user.id,
@@ -58,6 +58,7 @@ const UserCard = ({ user }: Props) => {
         {!user.active && (
           <Button
             m={5}
+            bgColor="red"
             onClick={() => {
               const activeUserVariable: activeUserVariable = {
                 id: user.id,

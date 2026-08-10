@@ -1,3 +1,4 @@
+import { PasswordInput } from "@/components/ui/password-input";
 import { toaster } from "@/components/ui/toaster";
 import type loginUser from "@/entities/loginUser";
 import useLogIn from "@/hooks/useLogIn";
@@ -67,7 +68,7 @@ const SignInPage = () => {
                 Password
                 <Field.RequiredIndicator />
               </Field.Label>
-              <Input {...register("password")} />
+              <PasswordInput {...register("password")} />
               <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
             </Field.Root>
 
