@@ -1,5 +1,14 @@
 import type Product from "@/entities/product";
-import { Button, Card, IconButton, Image, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Card,
+  CloseButton,
+  Dialog,
+  IconButton,
+  Image,
+  Portal,
+  Text,
+} from "@chakra-ui/react";
 import ExpandableText from "./ExpandableText";
 import useAddProduct from "@/hooks/useAddProduct";
 import type addProduct from "@/entities/addProduct";
@@ -62,13 +71,42 @@ const ProductsCard = ({ product }: Props) => {
           </Link>
         )}
         {isAdmin && (
-          <IconButton
-            variant="ghost"
-            colorPalette="red"
-            onClick={() => mutateAdminDeleteProduct.mutate(product.id)}
-          >
-            <RiDeleteBinLine size={22} />
-          </IconButton>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <IconButton variant="ghost" colorPalette="red">
+                <RiDeleteBinLine size={22} />
+              </IconButton>
+            </Dialog.Trigger>
+            <Portal>
+              <Dialog.Backdrop />
+              <Dialog.Positioner>
+                <Dialog.Content>
+                  <Dialog.Header>
+                    <Dialog.Title>Delete</Dialog.Title>
+                  </Dialog.Header>
+                  <Dialog.Body>
+                    <p>Delete the Product</p>
+                  </Dialog.Body>
+                  <Dialog.Footer>
+                    <Dialog.ActionTrigger asChild>
+                      <Button variant="outline">Cancel</Button>
+                    </Dialog.ActionTrigger>
+                    <Button
+                      bgColor="red"
+                      onClick={() =>
+                        mutateAdminDeleteProduct.mutate(product.id)
+                      }
+                    >
+                      Delete
+                    </Button>
+                  </Dialog.Footer>
+                  <Dialog.CloseTrigger asChild>
+                    <CloseButton size="sm" />
+                  </Dialog.CloseTrigger>
+                </Dialog.Content>
+              </Dialog.Positioner>
+            </Portal>
+          </Dialog.Root>
         )}
       </Card.Footer>
     </Card.Root>
