@@ -1,10 +1,12 @@
 import type Product from "@/entities/product";
-import { Button, Card, Image, Text } from "@chakra-ui/react";
+import { Button, Card, IconButton, Image, Text } from "@chakra-ui/react";
 import ExpandableText from "./ExpandableText";
 import useAddProduct from "@/hooks/useAddProduct";
 import type addProduct from "@/entities/addProduct";
 import useQueryStore from "@/store";
 import { Link } from "react-router";
+import { RiDeleteBinLine } from "react-icons/ri";
+import useAdminDeleteProduct from "@/hooks/useAdminDeleteProducts";
 
 interface Props {
   product: Product;
@@ -13,6 +15,7 @@ interface Props {
 const ProductsCard = ({ product }: Props) => {
   const isAdmin = useQueryStore((s) => s.isAdmin);
   const mutateAddProduct = useAddProduct();
+  const mutateAdminDeleteProduct = useAdminDeleteProduct();
 
   const pId: addProduct = { productId: product.id };
 
@@ -57,6 +60,15 @@ const ProductsCard = ({ product }: Props) => {
           >
             <Button variant="solid">Update</Button>
           </Link>
+        )}
+        {isAdmin && (
+          <IconButton
+            variant="ghost"
+            colorPalette="red"
+            onClick={() => mutateAdminDeleteProduct.mutate(product.id)}
+          >
+            <RiDeleteBinLine size={22} />
+          </IconButton>
         )}
       </Card.Footer>
     </Card.Root>
