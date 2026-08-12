@@ -13,7 +13,7 @@ import ExpandableText from "./ExpandableText";
 import useAddProduct from "@/hooks/useAddProduct";
 import type addProduct from "@/entities/addProduct";
 import useQueryStore from "@/store";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { RiDeleteBinLine } from "react-icons/ri";
 import useAdminDeleteProduct from "@/hooks/useAdminDeleteProducts";
 
@@ -23,6 +23,8 @@ interface Props {
 
 const ProductsCard = ({ product }: Props) => {
   const isAdmin = useQueryStore((s) => s.isAdmin);
+  const isLoggedIn = useQueryStore((s) => s.isLoggedIn);
+  const navigate = useNavigate();
   const mutateAddProduct = useAddProduct();
   const mutateAdminDeleteProduct = useAdminDeleteProduct();
 
@@ -49,15 +51,22 @@ const ProductsCard = ({ product }: Props) => {
       </Card.Body>
       <Card.Footer gap="2">
         {!isAdmin && (
-          <Link to={"/Cart"}>
-            <Button variant="solid">Buy now</Button>
-          </Link>
+          <Button
+            variant="solid"
+            onClick={() => {
+              if (!isLoggedIn) navigate("/User/SignIn");
+              else navigate("/Cart");
+            }}
+          >
+            Buy now
+          </Button>
         )}
         {!isAdmin && (
           <Button
             variant="ghost"
             onClick={() => {
-              mutateAddProduct.mutate(pId);
+              if (!isLoggedIn) navigate("/User/SignIn");
+              else mutateAddProduct.mutate(pId);
             }}
           >
             Add to cart
