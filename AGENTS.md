@@ -10,7 +10,7 @@ React 19 + Vite 8 + TypeScript SPA. Chakra UI v3, TanStack Query v5, Zustand, Re
 - No test framework or test runner exists. Verify with `npm run lint` then `npm run build`.
 
 ## Runtime requirement
-The app talks to a backend at `http://localhost:8765` (baseURL hardcoded in `src/services/apiClient.ts`). Data fetch/mutation will fail if it's not running.
+The app talks to a backend at `http://localhost:8765` (baseURL set via `VITE_API_URL` in `.env`, defaulting to `http://localhost:8765` in `src/services/apiClient.ts`). Data fetch/mutation will fail if it's not running.
 
 ## Conventions
 - Path alias: `@/*` -> `src/*` (set in `tsconfig.app.json` `paths`, resolved natively by Vite 8 via `resolve.tsconfigPaths: true` — do NOT add a `vite-tsconfig-paths` plugin). Always use `@/` imports.
@@ -18,6 +18,7 @@ The app talks to a backend at `http://localhost:8765` (baseURL hardcoded in `src
 - Data-fetching logic lives in `src/hooks/useX.ts` as TanStack Query hooks wrapping `APIClient`. React Query + Zustand together: React Query owns server state, `src/store.ts` (Zustand) owns UI/query state.
 - `src/entities/` are type-only interfaces — no runtime logic.
 - `src/routes.tsx` is the single router definition; pages live in `src/pages/`.
+- Protected routes are wrapped by `src/components/RequireAuth.tsx` (logged-in only) and `src/components/RequireAdmin.tsx` (admin only) in `src/routes.tsx`.
 - `src/components/ui/` files are Chakra CLI-generated — treat as generated; put custom components elsewhere.
 - `src/components/test.tsx` is an empty leftover file; do not extend it.
 

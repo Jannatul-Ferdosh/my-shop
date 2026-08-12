@@ -8,7 +8,7 @@ import type updateProduct from "@/entities/updateProduct";
 import axios, { type AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL:'http://localhost:8765'
+    baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:8765'
 })
 
 axiosInstance.interceptors.request.use((config)=>{
