@@ -30,7 +30,11 @@ const ProductsGrid = () => {
       <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
         <Menu.Root>
           <Menu.Trigger asChild>
+<<<<<<< HEAD
             <Button variant="outline" >
+=======
+            <Button bgColor="gray.200" variant="outline" >
+>>>>>>> d869f8fb67608a3952e632e0f37df9b7beb869d7
               {sorted || sortby}
               <IoChevronDown />
             </Button>
