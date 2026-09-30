@@ -21,7 +21,7 @@ const ItemCategory = () => {
       </Menu.Trigger>
       <Portal>
         <Menu.Positioner>
-          <Menu.Content bgColor="#fbf0e1">
+          <Menu.Content>
             <Link to={"/AllProducts"}>
               <Menu.Item
                 value="All Products"

@@ -24,13 +24,14 @@ const ProductsGrid = () => {
   const { data, error, isLoading } = useProducts();
   if (error) return null;
   if (isLoading) return <Spinner />;
+  const sortby = "Sort By";
   return (
     <>
       <Flex justify="flex-end" paddingX={{ base: "40px", lg: "100px" }}>
         <Menu.Root>
           <Menu.Trigger asChild>
-            <Button bgColor="gray.200" variant="outline">
-              {sorted || "Sort by"}
+            <Button variant="outline" >
+              {sorted || sortby}
               <IoChevronDown />
             </Button>
           </Menu.Trigger>

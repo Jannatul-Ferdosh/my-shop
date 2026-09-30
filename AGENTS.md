@@ -18,7 +18,6 @@ The app talks to a backend at `http://localhost:8765` (baseURL set via `VITE_API
 - Data-fetching logic lives in `src/hooks/useX.ts` as TanStack Query hooks wrapping `APIClient`. React Query + Zustand together: React Query owns server state, `src/store.ts` (Zustand) owns UI/query state.
 - `src/entities/` are type-only interfaces — no runtime logic.
 - `src/routes.tsx` is the single router definition; pages live in `src/pages/`.
-- Protected routes are wrapped by `src/components/RequireAuth.tsx` (logged-in only) and `src/components/RequireAdmin.tsx` (admin only) in `src/routes.tsx`.
 - `src/components/ui/` files are Chakra CLI-generated — treat as generated; put custom components elsewhere.
 - `src/components/test.tsx` is an empty leftover file; do not extend it.
 
